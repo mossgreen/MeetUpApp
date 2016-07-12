@@ -6,7 +6,6 @@ namespace GigHub.ViewModels
 {
     public class FutureDate : ValidationAttribute
     {
-
         public override bool IsValid(object value)
         {
             DateTime dateTime;
