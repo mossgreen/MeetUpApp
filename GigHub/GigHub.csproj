@@ -231,6 +231,10 @@
     <Compile Include="Migrations\201607120048190_deleteRequiredToArtist.Designer.cs">
       <DependentUpon>201607120048190_deleteRequiredToArtist.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607120549005_debug.cs" />
+    <Compile Include="Migrations\201607120549005_debug.Designer.cs">
+      <DependentUpon>201607120549005_debug.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -340,6 +344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607120048190_deleteRequiredToArtist.resx">
       <DependentUpon>201607120048190_deleteRequiredToArtist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120549005_debug.resx">
+      <DependentUpon>201607120549005_debug.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
