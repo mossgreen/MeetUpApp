@@ -219,6 +219,18 @@
     <Compile Include="Migrations\201607110942576_PopulateGenresTable.Designer.cs">
       <DependentUpon>201607110942576_PopulateGenresTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607120026031_changeGenreType.cs" />
+    <Compile Include="Migrations\201607120026031_changeGenreType.Designer.cs">
+      <DependentUpon>201607120026031_changeGenreType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607120042341_changeGenreIdToByte.cs" />
+    <Compile Include="Migrations\201607120042341_changeGenreIdToByte.Designer.cs">
+      <DependentUpon>201607120042341_changeGenreIdToByte.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607120048190_deleteRequiredToArtist.cs" />
+    <Compile Include="Migrations\201607120048190_deleteRequiredToArtist.Designer.cs">
+      <DependentUpon>201607120048190_deleteRequiredToArtist.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -319,6 +331,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607110942576_PopulateGenresTable.resx">
       <DependentUpon>201607110942576_PopulateGenresTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120026031_changeGenreType.resx">
+      <DependentUpon>201607120026031_changeGenreType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120042341_changeGenreIdToByte.resx">
+      <DependentUpon>201607120042341_changeGenreIdToByte.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607120048190_deleteRequiredToArtist.resx">
+      <DependentUpon>201607120048190_deleteRequiredToArtist.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
