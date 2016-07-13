@@ -1,5 +1,5 @@
-﻿using System.Data.Entity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Data.Entity;
 
 namespace GigHub.Models
 {
@@ -8,6 +8,7 @@ namespace GigHub.Models
 
         public DbSet<Gig> Gigs { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
