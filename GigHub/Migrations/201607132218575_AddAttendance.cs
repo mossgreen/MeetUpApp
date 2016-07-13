@@ -16,7 +16,7 @@ namespace GigHub.Migrations
                     })
                 .PrimaryKey(t => new { t.GigId, t.AttendeeId })
                 .ForeignKey("dbo.AspNetUsers", t => t.AttendeeId, cascadeDelete: true)
-                .ForeignKey("dbo.Gigs", t => t.GigId, cascadeDelete: true)
+                .ForeignKey("dbo.Gigs", t => t.GigId)
                 .Index(t => t.GigId)
                 .Index(t => t.AttendeeId);
             
