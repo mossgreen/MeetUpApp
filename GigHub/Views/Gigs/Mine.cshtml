@@ -23,6 +23,12 @@
                 <span class="genre">
                     @gig.Genre.Name
                 </span>
+                
+                <div class="actions">
+                    <a href="@Url.Action("Edit", "Gigs", new {id = gig.Id})">
+                        Eidt
+                    </a>
+                </div>
             </div>
         </li>
     }
