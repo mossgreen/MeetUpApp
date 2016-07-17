@@ -66,6 +66,7 @@ namespace GigHub.Controllers
             var viewModel = new GigFormViewModel
             {
                 Heading = "Edit a Gig",
+                Id = gig.Id,
                 Genres = _context.Genres.ToList(),
                 Date = gig.DateTime.ToString("d MMM yyyy"),
                 Time = gig.DateTime.ToString("HH:mm"),
@@ -130,7 +131,7 @@ namespace GigHub.Controllers
             gig.DateTime = viewModel.GetDateTime();
             gig.GenreId = viewModel.Genre;
 
-  
+
             _context.SaveChanges();
 
             return RedirectToAction("Mine", "Gigs");
