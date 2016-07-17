@@ -72,7 +72,7 @@ namespace GigHub.Controllers
                 Venue = gig.Venue
             };
 
-            return View("Create", viewModel);
+            return View("GigForm", viewModel);
         }
 
         [Authorize]
@@ -83,7 +83,7 @@ namespace GigHub.Controllers
                 Genres = _context.Genres.ToList()
             };
 
-            return View(viewModel);
+            return View("GigForm", viewModel);
         }
 
         [Authorize]
