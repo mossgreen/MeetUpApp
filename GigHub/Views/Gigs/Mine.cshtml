@@ -38,29 +38,44 @@
 @section scripts
 {
     <script>
-        $(document).ready(function() {
-            $(".js-cancel-gig").click(function(e) {
+        $(document).ready(function () {
+            $(".js-cancel-gig").click(function (e) {
                 var link = $(e.target);
 
-
-                bootbox.confirm("Are you sure you want to cancel?",
-                    function(result) {
-                        $.ajax({
-                            url: "/api/gigs/" + link.attr("data-gig-id"),
-                            method: "DELETE"
-                        })
-                        .done(function () {
-                            link.parents("li").fadeOut(function () {
-                                $(this).remove();
-                            });
-                        })
-                        .fail(function () {
-                            alert("something wrong with .js-cancel-gig ajax/");
-                        });
-                    });
+                bootbox.dialog({
+                    message: "Are you sure you want to cancel this gig?",
+                    title: "Confirm",
+                    buttons: {
+                        no: {
+                            label: "No",
+                            className: "btn-default",
+                            callback: function () {
+                                bootbox.hideAll();
+                            }
+                        },
+                        yes: {
+                            label: "Yes",
+                            className: "btn-danger",
+                            callback: function () {
+                                $.ajax({
+                                    url: "/api/gigs/" + link.attr("data-gig-id"),
+                                    method: "DELETE"
+                                })
+                                .done(function () {
+                                    link.parents("li").fadeOut(function () {
+                                        $(this).remove();
+                                    });
+                                })
+                                .fail(function () {
+                                    alert("Something failed!");
+                                });
+                            }
+                        }
+                    }
+                });
             });
         });
-    </script>
+</script>
 }
 
 
