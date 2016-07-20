@@ -47,13 +47,9 @@ namespace GigHub.Controllers.Api
             //iterate attendees and send userNotification to each of them
             foreach (var attendee in attendees)
             {
-                var userNotification = new UserNotification
-                {
-                    User = attendee,
-                    Notification = notification,
-                };
 
-                _context.UserNotifications.Add(userNotification);
+                attendee.Notify(notification);
+
             }
 
             _context.SaveChanges();
