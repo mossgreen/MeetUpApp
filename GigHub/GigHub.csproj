@@ -210,10 +210,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\AttendancesController.cs" />
+    <Compile Include="Controllers\Api\FollowingsController.cs" />
     <Compile Include="Controllers\Api\GigsController.cs" />
-    <Compile Include="Controllers\AttendancesController.cs" />
     <Compile Include="Controllers\FolloweesController.cs" />
-    <Compile Include="Controllers\FollowingsController.cs" />
     <Compile Include="Controllers\GigsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -270,6 +270,10 @@
     <Compile Include="Migrations\201607191327373_AddIsCanceledToGig.Designer.cs">
       <DependentUpon>201607191327373_AddIsCanceledToGig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607201252509_AddNotification.cs" />
+    <Compile Include="Migrations\201607201252509_AddNotification.Designer.cs">
+      <DependentUpon>201607201252509_AddNotification.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -279,6 +283,9 @@
     <Compile Include="Models\Gig.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Notification.cs" />
+    <Compile Include="Models\NotificationType.cs" />
+    <Compile Include="Models\UserNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\FutureDate.cs" />
@@ -403,6 +410,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201607191327373_AddIsCanceledToGig.resx">
       <DependentUpon>201607191327373_AddIsCanceledToGig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607201252509_AddNotification.resx">
+      <DependentUpon>201607201252509_AddNotification.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
