@@ -32,7 +32,7 @@ namespace GigHub.Migrations
                     })
                 .PrimaryKey(t => new { t.UserId, t.NotificationId })
                 .ForeignKey("dbo.Notifications", t => t.NotificationId, cascadeDelete: true)
-                .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
+                .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.NotificationId);
             
