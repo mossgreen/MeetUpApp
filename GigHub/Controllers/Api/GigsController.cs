@@ -1,5 +1,6 @@
 ﻿using GigHub.Models;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
 
@@ -22,6 +23,7 @@ namespace GigHub.Controllers.Api
         {
             var userId = User.Identity.GetUserId();
             var gig = _context.Gigs
+                .Include(g => g.Attendances.Select(a => a.Attendee))
                 .Single(g => g.Id == id && g.ArtistId == userId);
 
             if (gig.IsCanceled)
@@ -32,14 +34,9 @@ namespace GigHub.Controllers.Api
             //when gig is cancelled, send notification
             var notification = new Notification(NotificationType.GigCanceled, gig);
 
-            //get all users that going to attend this gig
-            var attendees = _context.Attendances
-                .Where(a => a.GigId == gig.Id)
-                .Select(a => a.Attendee)
-                .ToList();
 
             //iterate attendees and send userNotification to each of them
-            foreach (var attendee in attendees)
+            foreach (var attendee in gig.Attendances.Select(a => a.Attendee))
             {
 
                 attendee.Notify(notification);
