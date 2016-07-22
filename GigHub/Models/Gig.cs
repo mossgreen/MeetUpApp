@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace GigHub.Models
 {
@@ -32,6 +33,23 @@ namespace GigHub.Models
         public Gig()
         {
             Attendances = new Collection<Attendance>();
+        }
+
+        public void Cancel()
+        {
+            IsCanceled = true;
+
+            //when gig is cancelled, send notification
+            var notification = new Notification(NotificationType.GigCanceled, this);
+
+
+            //iterate attendees and send userNotification to each of them
+            foreach (var attendee in Attendances.Select(a => a.Attendee))
+            {
+
+                attendee.Notify(notification);
+
+            }
         }
     }
 }

@@ -26,22 +26,12 @@ namespace GigHub.Controllers.Api
                 .Include(g => g.Attendances.Select(a => a.Attendee))
                 .Single(g => g.Id == id && g.ArtistId == userId);
 
+            /*find the gig that going to be canceled, if it's been canceled, return not found,
+             otherwise, set it as isCanceled, and give notification to users*/
             if (gig.IsCanceled)
                 return NotFound();
 
-            gig.IsCanceled = true;
-
-            //when gig is cancelled, send notification
-            var notification = new Notification(NotificationType.GigCanceled, gig);
-
-
-            //iterate attendees and send userNotification to each of them
-            foreach (var attendee in gig.Attendances.Select(a => a.Attendee))
-            {
-
-                attendee.Notify(notification);
-
-            }
+            gig.Cancel();
 
             _context.SaveChanges();
 
