@@ -40,7 +40,7 @@ namespace GigHub.Models
             IsCanceled = true;
 
             //when gig is cancelled, send notification
-            var notification = new Notification(NotificationType.GigCanceled, this);
+            var notification = Notification.GigCanceled(this);
 
 
             //iterate attendees and send userNotification to each of them
@@ -52,11 +52,10 @@ namespace GigHub.Models
             }
         }
 
+        /**/
         public void Modify(DateTime dateTime, string venue, byte genre)
         {
-            var notification = new Notification(NotificationType.GigUpdated, this);
-            notification.OriginalDateTime = DateTime;
-            notification.OriginalVenue = venue;
+            var notification = Notification.GigUpdated(this, DateTime, venue);
 
             Venue = venue;
             DateTime = DateTime;
