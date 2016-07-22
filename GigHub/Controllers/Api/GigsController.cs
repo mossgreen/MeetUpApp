@@ -1,6 +1,5 @@
 ﻿using GigHub.Models;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Linq;
 using System.Web.Http;
 
@@ -31,12 +30,7 @@ namespace GigHub.Controllers.Api
             gig.IsCanceled = true;
 
             //when gig is cancelled, send notification
-            var notification = new Notification
-            {
-                DateTime = DateTime.Now,
-                Gig = gig,
-                Type = NotificationType.GigCanceled,
-            };
+            var notification = new Notification(NotificationType.GigCanceled, gig);
 
             //get all users that going to attend this gig
             var attendees = _context.Attendances
