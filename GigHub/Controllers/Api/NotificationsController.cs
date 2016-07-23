@@ -17,7 +17,7 @@ namespace GigHub.Controllers.Api
             _context = new ApplicationDbContext();
         }
 
-        public IEnumerable<Notification> GetNewNotifications()
+        public IEnumerable<NotificationDto> GetNewNotifications()
         {
             var userId = User.Identity.GetUserId();
             var notifications = _context.UserNotifications
