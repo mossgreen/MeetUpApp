@@ -60,6 +60,17 @@
                 .addClass("animated bounceInDown");
 
             });
+
+            $(".notifications").popover({
+                html: true,
+                title: "Notifications",
+                content: function () {
+                    return "hello world.";
+                },
+
+                placement:"bottom",
+
+            });
         });
 
     </script>
