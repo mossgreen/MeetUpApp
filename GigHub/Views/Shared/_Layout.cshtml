@@ -49,5 +49,18 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+
+
+    <script>
+        $(document).ready(function () {
+            $.getJSON("/api/notifications", function (notificaitons) {
+                $(".js-notifications-count")
+                    .text(notificaitons.length)
+                    .removeClass("hide");
+
+            });
+        });
+
+    </script>
 </body>
 </html>
