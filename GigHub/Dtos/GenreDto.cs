@@ -2,8 +2,7 @@
 {
     public class GenreDto
     {
-
-        public byte id { get; set; }
+        public byte Id { get; set; }
         public string Name { get; set; }
     }
 }

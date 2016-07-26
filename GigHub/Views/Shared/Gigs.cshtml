@@ -3,7 +3,6 @@
     ViewBag.Title = "Home Page";
 }
 <h1>@Model.Heading</h1>
- 
 <ul class="gigs voffset4">
     @foreach (var gig in Model.UpcomingGigs)
     {
@@ -19,21 +18,24 @@
             <div class="details">
                 <span class="artist">
                     @gig.Artist.Name
-                    
+
                     @if (gig.IsCanceled)
                     {
                         <span class="label label-warning">Canceled</span>
                     }
-                    @if (Model.ShowActions && !gig.IsCanceled)
-                    {
-                     <button class="btn btn-link btn-sm js-toggle-follow" data-user-id="@gig.ArtistId">Follow</button>
 
+                    @if (Model.ShowActions)
+                    {
+                        <button class="btn btn-link btn-sm js-toggle-follow" data-user-id="@gig.ArtistId">Follow</button>
                     }
                 </span>
                 <span class="genre">
                     @gig.Genre.Name
                 </span>
-                <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
+                @if (Model.ShowActions && !gig.IsCanceled)
+                {
+                    <button data-gig-id="@gig.Id" class="btn btn-default btn-sm pull-right js-toggle-attendance">Going?</button>
+                }
             </div>
         </li>
     }
@@ -52,7 +54,7 @@
                             .text("Going");
                     })
                     .fail(function() {
-                        alert(".js-toggle-attendance failed!");
+                        alert("Something failed!");
                     });
             });
 
@@ -63,7 +65,7 @@
                         button.text("Following");
                     })
                     .fail(function () {
-                        alert("js-toggle-follow failed");
+                        alert("Something failed");
                     });
             });
         });
