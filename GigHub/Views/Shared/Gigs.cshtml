@@ -3,6 +3,13 @@
     ViewBag.Title = "Home Page";
 }
 <h1>@Model.Heading</h1>
+@using (Html.BeginForm("Search","Gigs"))
+{
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control"})
+    </div>
+    <input type = "submit" value = "Search" />
+}
 <ul class="gigs voffset4">
     @foreach (var gig in Model.UpcomingGigs)
     {
