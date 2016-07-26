@@ -58,7 +58,7 @@
             <li>
                 <span class="highlight">
                     <%= notification.gig.artist.name %>
-                </span> has canceled the gig at <%= notification.gig.venue %> at <%= notification.gig.dateTime %>.
+                </span> has canceled the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm") %>.
             </li>
             <% }
 
@@ -75,8 +75,8 @@
 
             if (notification.originalDateTime != notification.gig.dateTime) {
             changes.push('date/time');
-            originalValues.push(notification.originalDateTime);
-            newValues.push(notification.gig.dateTime);
+            originalValues.push(moment(notification.originalDateTime).format("D MMM HH:mm"));
+            newValues.push(moment(notification.gig.dateTime).format("D MMM HH:mm"));
             }
 
             %>
