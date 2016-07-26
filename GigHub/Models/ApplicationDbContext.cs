@@ -5,7 +5,6 @@ namespace GigHub.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-
         public DbSet<Gig> Gigs { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
@@ -13,9 +12,8 @@ namespace GigHub.Models
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<UserNotification> UserNotifications { get; set; }
 
-
         public ApplicationDbContext()
-        //            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
@@ -24,29 +22,29 @@ namespace GigHub.Models
             return new ApplicationDbContext();
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuider)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuider.Entity<Attendance>()
+            modelBuilder.Entity<Attendance>()
                 .HasRequired(a => a.Gig)
                 .WithMany(g => g.Attendances)
                 .WillCascadeOnDelete(false);
 
-            modelBuider.Entity<ApplicationUser>()
+            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Followers)
                 .WithRequired(f => f.Followee)
                 .WillCascadeOnDelete(false);
 
-            modelBuider.Entity<ApplicationUser>()
+            modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.Followees)
                 .WithRequired(f => f.Follower)
                 .WillCascadeOnDelete(false);
 
-            modelBuider.Entity<UserNotification>()
+            modelBuilder.Entity<UserNotification>()
                 .HasRequired(n => n.User)
                 .WithMany(u => u.UserNotifications)
                 .WillCascadeOnDelete(false);
 
-            base.OnModelCreating(modelBuider);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

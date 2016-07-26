@@ -8,16 +8,6 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <script type="text/javascript">
-        var appInsights=window.appInsights||function(config){
-            function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
-        }({
-            instrumentationKey:"d664d0a8-36eb-48f8-a9d5-a673653eeaa2"
-        });
-
-        window.appInsights=appInsights;
-        appInsights.trackPageView();
-    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -48,17 +38,12 @@
 
     @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
-
     <script type="text/x-template" id="notifications-template">
         <ul class="notifications">
             <%
             _.each(notifications, function(notification){
             if (notification.type == 1) { %>
-            <li>
-                <span class="highlight">
-                    <%= notification.gig.artist.name %>
-                </span> has canceled the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm") %>.
-            </li>
+            <li><span class="highlight"><%= notification.gig.artist.name %></span> has canceled the gig at <%= notification.gig.venue %> at <%= moment(notification.gig.dateTime).format("D MMM HH:mm") %>.</li>
             <% }
 
             else if (notification.type == 2) {
@@ -79,12 +64,7 @@
             }
 
             %>
-            <li>
-                <span class="highlight">
-                    <%= notification.gig.artist.name %>
-                </span>
-                has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %>
-            </li>
+            <li><span class="highlight"><%= notification.gig.artist.name %></span> has changed the <%= changes.join(' and ') %> of the gig from <%= originalValues.join('/') %> to <%= newValues.join('/') %></li>
             <%
             }
             })
@@ -112,9 +92,13 @@
                     placement: "bottom",
                     template: '<div class="popover popover-notifications" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
 
-                }).on("shown.bs.popover", function () {
-                    console.log("popover shown.");
-
+                }).on("shown.bs.popover", function() {
+                    $.post("/api/notifications/markAsRead")
+                        .done(function () {
+                            $(".js-notifications-count")
+                                .text("")
+                                .addClass("hide");
+                        });
                 });
 
             });
