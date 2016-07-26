@@ -108,6 +108,11 @@ h6,
   -ms-border-radius: 9px;
   border-radius: 9px;
 }
+.form-control:focus {
+  box-shadow: none;
+  transition: none;
+  -webkit-transition: none;
+}
 .btn {
   /*font-size: 17px;
     padding: 7px 20px;*/
@@ -178,8 +183,10 @@ h6,
 .popover-notifications ul.notifications .highlight {
   font-weight: bold;
 }
-
-#searchGigs{
-    width:300px;
+#searchGigs {
+  width: 400px;
+}
+#searchGigs input {
+  max-width: none;
 }
 /*# sourceMappingURL=site.css.map */
