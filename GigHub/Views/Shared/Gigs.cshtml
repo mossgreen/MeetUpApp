@@ -3,12 +3,16 @@
     ViewBag.Title = "Home Page";
 }
 <h1>@Model.Heading</h1>
-@using (Html.BeginForm("Search","Gigs"))
+@using (Html.BeginForm("Search", "Gigs"))
 {
     <div class="form-group">
-        @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control"})
+        <div class="input-group" id="searchGigs">
+            @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control" })
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
     </div>
-    <input type = "submit" value = "Search" />
 }
 <ul class="gigs voffset4">
     @foreach (var gig in Model.UpcomingGigs)
@@ -50,17 +54,17 @@
 @section scripts
 {
     <script>
-        $(document).ready(function() {
-            $(".js-toggle-attendance").click(function(e) {
+        $(document).ready(function () {
+            $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
                 $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
-                    .done(function() {
+                    .done(function () {
                         button
                             .removeClass("btn-default")
                             .addClass("btn-info")
                             .text("Going");
                     })
-                    .fail(function() {
+                    .fail(function () {
                         alert("Something failed!");
                     });
             });
