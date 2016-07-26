@@ -202,3 +202,6 @@ h6,
      .popover-notifications   ul.notifications >li:last-child{
         border-bottom:none;
     }
+       .popover-notifications   ul.notifications  .highlight{
+           font-weight:bold;
+       }
