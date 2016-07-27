@@ -75,6 +75,11 @@ namespace GigHub.Controllers
             return View("GigForm", viewModel);
         }
 
+        /*this method retrieved data from database
+        firstly, it gets userId from current user,
+        and then, it gets the gig from gigs table from database,
+        at last, build a viewModel and send it to GigForm,
+        hence GigForm becomes an Editing form.*/
         [Authorize]
         public ActionResult Edit(int id)
         {
@@ -137,6 +142,13 @@ namespace GigHub.Controllers
                 return View("GigForm", viewModel);
             }
 
+            /*if this post method passed validation,
+            it firstly will get the userId, which is the id of current artist's id
+            and then it will get this old gig from Gigs table from database, 
+            with Attendances infomation with it.
+            At last, making modifications to this gig with data from viewModel.
+            this Modify method is from Models/Gig, and 
+            will iterate each attendee to notify them the modification of this gig.*/
             var userId = User.Identity.GetUserId();
             var gig = _context.Gigs
                 .Include(g => g.Attendances.Select(a => a.Attendee))
