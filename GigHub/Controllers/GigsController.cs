@@ -59,7 +59,10 @@ namespace GigHub.Controllers
             return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
         }
 
-
+        /*this is the httpGet for Add a Gig page,
+        it will get genres list as data provided for dropdown list
+        and heading for this page: Add a gig. reason for heading:
+        this page can also be used as Updating a gig page.*/
         [Authorize]
         public ActionResult Create()
         {
@@ -97,12 +100,18 @@ namespace GigHub.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(GigFormViewModel viewModel)
         {
+            /*if the form didn't pass the validation
+            the the dropdown list still can get genres data
+            but won't post data*/
             if (!ModelState.IsValid)
             {
                 viewModel.Genres = _context.Genres.ToList();
                 return View("GigForm", viewModel);
             }
-
+            /*if the form passed the validation
+            construct a new gig using the filed data
+            add this gig to gigs table and save the database
+            redirect this page to Views/Gigs/Mine page*/
             var gig = new Gig
             {
                 ArtistId = User.Identity.GetUserId(),

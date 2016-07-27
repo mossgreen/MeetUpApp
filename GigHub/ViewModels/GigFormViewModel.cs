@@ -10,7 +10,6 @@ namespace GigHub.ViewModels
 {
     public class GigFormViewModel
     {
-
         public int Id { get; set; }
 
         [Required]
@@ -31,6 +30,7 @@ namespace GigHub.ViewModels
 
         public string Heading { get; set; }
 
+        //Todo: cannot understand this method
         public string Action
         {
             get
@@ -42,11 +42,7 @@ namespace GigHub.ViewModels
                     (c => c.Create(this));
 
                 var action = (Id != 0) ? update : create;
-                var actionName = (action.Body as MethodCallExpression)
-                    .Method
-                    .Name;
-                return actionName;
-
+                return (action.Body as MethodCallExpression).Method.Name;
             }
         }
 
