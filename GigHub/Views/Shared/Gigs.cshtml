@@ -3,6 +3,9 @@
     ViewBag.Title = "Home Page";
 }
 <h1>@Model.Heading</h1>
+
+
+@*searching form*@
 @using (Html.BeginForm("Search", "Gigs"))
 {
     <div class="form-group">
@@ -55,6 +58,11 @@
 {
     <script>
         $(document).ready(function () {
+
+            /*clicking the Going button will trager a http post
+            with content of GigId, which comes from this button's attribute
+            it will be passed as an Attendance Dto to controllers/api/AttendanceController,
+            database will save this Attendance with current user's id and artist id.*/
             $(".js-toggle-attendance").click(function (e) {
                 var button = $(e.target);
                 $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
@@ -69,6 +77,10 @@
                     });
             });
 
+            /*clicking the Follow button will trager a http post
+           with data of artistId, which comes from this button's attribute
+           it will be passed as an Following Dto to controllers/api/FollowingController,
+           database will save this Following with gigId and AttendeeId.*/
             $(".js-toggle-follow").click(function (e) {
                 var button = $(e.target);
                 $.post("/api/followings", { followeeId: button.attr("data-user-id") })
