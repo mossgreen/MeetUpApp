@@ -162,10 +162,10 @@ namespace GigHub.Controllers
         }
 
         [Authorize]
-        public ActionResult Details(int gigId)
+        public ActionResult Details(int id)
         {
             var userId = User.Identity.GetUserId();
-            var Gig = _context.Gigs.Single(g => g.Id == gigId);
+            var Gig = _context.Gigs.Single(g => g.Id == id);
 
 
             return View("Details", Gig);
