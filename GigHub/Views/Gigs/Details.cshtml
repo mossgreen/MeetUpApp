@@ -1,19 +1,13 @@
-﻿@model GigHub.Models.Gig
+﻿@model GigHub.ViewModels.GigDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>@Model.Artist</h2>
+<h2>@Model.Gig.Artist</h2>
 @{ 
     <br />
     <text>
-        Performing at @Model.Venue on moment(@Model.DateTime).format("d MMM yyyy HH:mm")
+        Performing at @Model.Gig.Venue on moment(@Model.Gig.DateTime).format("d MMM yyyy HH:mm")
     <br />
-if(@Model.Attendances){
-
-You are goging to this event.
-}
-
-
 </text>
     }
