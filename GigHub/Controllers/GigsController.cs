@@ -160,5 +160,15 @@ namespace GigHub.Controllers
 
             return RedirectToAction("Mine", "Gigs");
         }
+
+        [Authorize]
+        public ActionResult Details(int gigId)
+        {
+            var userId = User.Identity.GetUserId();
+            var Gig = _context.Gigs.Single(g => g.Id == gigId);
+
+
+            return View("Details", Gig);
+        }
     }
 }
