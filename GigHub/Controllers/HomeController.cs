@@ -1,5 +1,6 @@
 ﻿using GigHub.Models;
 using GigHub.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -41,6 +42,12 @@ namespace GigHub.Controllers
                             g.Venue.Contains(query));
             }
 
+            var userId = User.Identity.GetUserId();
+            var attendances = _context.Attendances
+                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
+                .ToList()
+                .ToLookup(a => a.GigId);
+
             /*controller will pass data from model to view, however,
             here we should use ViewModel in order to simplify models.
             Hence, in the end, this method will send this viewModel 
@@ -51,6 +58,7 @@ namespace GigHub.Controllers
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Upcoming Gigs",
                 SearchTerm = query,
+                Attendances = attendances,
             };
 
             /*thid Gigs view is in the Shared folder,as Gigs.cshtml*/
