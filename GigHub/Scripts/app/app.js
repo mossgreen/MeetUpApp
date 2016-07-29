@@ -13,19 +13,27 @@
     var toggleAttendance = function (e) {
          button = $(e.target);
 
-        if (button.hasClass("btn-default")) {
-            $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
-                .done(done)
-                .fail(fail);
-        } else {
-            $.ajax({
-                url: "/api/attendances/" + button.attr("data-gig-id"),
-                method: "DELETE"
-
-            }).done(done)
-            .fail(fail);
-        }
+        if (button.hasClass("btn-default")) 
+            createAttendance();
+         else 
+            deleteAttendance();
     };
+
+    var createAttendance = function () {
+        $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
+                    .done(done)
+                    .fail(fail);
+    };
+
+    var deleteAttendance = function () {
+        $.ajax({
+            url: "/api/attendances/" + button.attr("data-gig-id"),
+            method: "DELETE"
+
+        }).done(done)
+                .fail(fail);
+    };
+
 
     //using toggleClass means if you have this class, it will be removed
     //otherwise it will be added.
