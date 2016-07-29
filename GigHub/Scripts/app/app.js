@@ -19,9 +19,7 @@
                         .addClass("btn-info")
                         .text("Going");
                 })
-                .fail(function () {
-                    alert("Something failed!");
-                });
+                .fail(fail);
         } else {
             $.ajax({
                 url: "/api/attendances/" + button.attr("data-gig-id"),
@@ -33,11 +31,12 @@
                 .addClass("btn-default")
                 .text("Going?");
             })
-            .fail(function () {
-
-                alert("btn-info failed to remove. ");
-            });
+            .fail(fail);
         }
+    };
+
+    var fail = function () {
+        alert("btn-info failed to toggle. ");
     };
 
     return {
