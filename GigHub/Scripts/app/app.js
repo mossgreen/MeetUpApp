@@ -1,4 +1,18 @@
-﻿function initGigs() {
+﻿var GigsController = function () {
+
+    var init = function () {
+
+
+    };
+
+    return {
+        init:init
+    }
+
+}();
+
+
+function initGigs() {
     /*clicking the Going button will trager a http post
                 with content of GigId, which comes from this button's attribute
                 it will be passed as an Attendance Dto to controllers/api/AttendanceController,
