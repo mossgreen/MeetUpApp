@@ -34,7 +34,7 @@
                 gigId = button.attr("data-gig-id");
 
                 if (button.hasClass("btn-default")) {
-                    $post("api/attendance", { gigId: button.attr("data-gig-id") })
+                    $post("/api/attendance", { gigId: button.attr("data-gig-id") })
                     .done(function () {
 
                         alert("haha");
@@ -43,7 +43,15 @@
                 }
                 else {
 
-                    alert(gigId);
+                    $.ajax({
+                        url: "/api/attendance" + gigId,
+                        method: "DELETE"
+
+                    })
+                    .done(function () { alert(gigId); })
+                    .fail(function () { alert("failed"); });
+
+                   
                 }
             });
 
