@@ -1,5 +1,7 @@
 ﻿var GigsController = function () {
 
+    var button;
+
     var init = function () {
         /*clicking the Going button will trager a http post
                 with content of GigId, which comes from this button's attribute
@@ -9,30 +11,28 @@
     };
 
     var toggleAttendance = function (e) {
-        var button = $(e.target);
+         button = $(e.target);
 
         if (button.hasClass("btn-default")) {
             $.post("/api/attendances", { gigId: button.attr("data-gig-id") })
-                .done(function () {
-                    button
-                        .removeClass("btn-default")
-                        .addClass("btn-info")
-                        .text("Going");
-                })
+                .done(done)
                 .fail(fail);
         } else {
             $.ajax({
                 url: "/api/attendances/" + button.attr("data-gig-id"),
                 method: "DELETE"
 
-            }).done(function () {
-                button
-                    .removeClass("btn-info")
-                .addClass("btn-default")
-                .text("Going?");
-            })
+            }).done(done)
             .fail(fail);
         }
+    };
+
+    //using toggleClass means if you have this class, it will be removed
+    //otherwise it will be added.
+    var done = function () {
+        var text = (button.text() == "Going") ? "Going?" : "Going";
+
+        button.toggleClass("btn-info").toggleClass("btn-default");
     };
 
     var fail = function () {
