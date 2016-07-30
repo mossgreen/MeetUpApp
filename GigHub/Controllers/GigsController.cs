@@ -153,11 +153,16 @@ namespace GigHub.Controllers
             this Modify method is from Models/Gig, and 
             will iterate each attendee to notify them the modification of this gig.*/
             var userId = User.Identity.GetUserId();
-            var gig = _context.Gigs
-                .Include(g => g.Attendances.Select(a => a.Attendee))
-                .Single(g => g.Id == viewModel.Id && g.ArtistId == userId);
+
+            var gig = _gigRepository.GetGigWithAttendees(viewModel.Id);
 
             gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre);
+
+            if (gig == null)
+                return HttpNotFound();
+
+            if (gig.ArtistId != userId)
+                return new HttpUnauthorizedResult();
 
             _context.SaveChanges();
 
