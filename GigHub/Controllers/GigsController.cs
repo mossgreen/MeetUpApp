@@ -2,6 +2,7 @@
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -36,27 +37,32 @@ namespace GigHub.Controllers
         public ActionResult Attending()
         {
             var userId = User.Identity.GetUserId();
-            var gigs = _context.Attendances
+
+            var viewModel = new GigsViewModel()
+            {
+                UpcomingGigs = GetGigsUserAttending(userId),
+                ShowActions = User.Identity.IsAuthenticated,
+                Heading = "Gigs I'm Attending",
+                Attendances = GetFutureAttendances(userId).ToLookup(a => a.GigId),
+            };
+
+            return View("Gigs", viewModel);
+        }
+
+        private List<Attendance> GetFutureAttendances(string userId)
+        {
+            return _context.Attendances
+               .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
+               .ToList();
+        }
+        private List<Gig> GetGigsUserAttending(String userId)
+        {
+            return _context.Attendances
                 .Where(a => a.AttendeeId == userId)
                 .Select(a => a.Gig)
                 .Include(g => g.Artist)
                 .Include(g => g.Genre)
                 .ToList();
-
-            var attendances = _context.Attendances
-               .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-               .ToList()
-               .ToLookup(a => a.GigId);
-
-            var viewModel = new GigsViewModel()
-            {
-                UpcomingGigs = gigs,
-                ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Gigs I'm Attending",
-                Attendances = attendances,
-            };
-
-            return View("Gigs", viewModel);
         }
 
         [HttpPost]
