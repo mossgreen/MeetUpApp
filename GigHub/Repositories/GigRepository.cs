@@ -22,6 +22,12 @@ namespace GigHub.Repositories
                     .SingleOrDefault(g => g.Id == gigId);
         }
 
+        public Gig GetGigToEdit(int gigId)
+        {
+            return _context.Gigs.SingleOrDefault(g => g.Id == gigId);
+
+        }
+
         public IEnumerable<Gig> GetGigsOfMine(string userId)
         {
             return _context.Gigs

@@ -80,7 +80,14 @@ namespace GigHub.Controllers
         public ActionResult Edit(int id)
         {
             var userId = User.Identity.GetUserId();
-            var gig = _context.Gigs.Single(g => g.Id == id && g.ArtistId == userId);
+            var gig = _gigRepository.GetGigToEdit(userId);
+
+            if (gig == null)
+                return HttpNotFound();
+
+            if (gig.ArtistId != userId)
+                return new HttpUnauthorizedResult();
+
 
             var viewModel = new GigFormViewModel
             {
