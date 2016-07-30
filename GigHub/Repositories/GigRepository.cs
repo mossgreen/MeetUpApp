@@ -16,7 +16,7 @@ namespace GigHub.Repositories
         }
 
 
-        private IEnumerable<Gig> GetGigsUserAttending(String userId)
+        public IEnumerable<Gig> GetGigsUserAttending(String userId)
         {
             return _context.Attendances
                 .Where(a => a.AttendeeId == userId)
