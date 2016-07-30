@@ -55,15 +55,7 @@ namespace GigHub.Controllers
                .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
                .ToList();
         }
-        private List<Gig> GetGigsUserAttending(String userId)
-        {
-            return _context.Attendances
-                .Where(a => a.AttendeeId == userId)
-                .Select(a => a.Gig)
-                .Include(g => g.Artist)
-                .Include(g => g.Genre)
-                .ToList();
-        }
+
 
         [HttpPost]
         public ActionResult Search(GigsViewModel viewModel)
