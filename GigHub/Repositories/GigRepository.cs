@@ -22,7 +22,18 @@ namespace GigHub.Repositories
                     .SingleOrDefault(g => g.Id == gigId);
         }
 
-        public IEnumerable<Gig> GetGigsUserAttending(String userId)
+        public IEnumerable<Gig> GetGigsOfMine(string userId)
+        {
+            return _context.Gigs
+                .Where(g =>
+                    g.ArtistId == userId &&
+                    g.DateTime > DateTime.Now &&
+                    !g.IsCanceled)
+                    .Include(g => g.Genre)
+                    .ToList();
+        }
+
+        public IEnumerable<Gig> GetGigsUserAttending(string userId)
         {
             return _context.Attendances
                 .Where(a => a.AttendeeId == userId)

@@ -2,7 +2,6 @@
 using GigHub.Repositories;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
-using System;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -26,13 +25,7 @@ namespace GigHub.Controllers
         public ActionResult Mine()
         {
             var userId = User.Identity.GetUserId();
-            var gigs = _context.Gigs
-                .Where(g =>
-                    g.ArtistId == userId &&
-                    g.DateTime > DateTime.Now &&
-                    !g.IsCanceled)
-                .Include(g => g.Genre)
-                .ToList();
+            var gigs = _gigRepository.GetGigsOfMine(userId);
 
             return View(gigs);
         }
