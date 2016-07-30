@@ -8,12 +8,14 @@
     @Model.Gig.Artist.Name
     @if (User.Identity.IsAuthenticated)
     {
-
-        <button data-gig-id="@Model.Gig.Id"
-                class="btn @(Model.IsFollowing?"btn-info":"btn-default") js-toggle-attendance">
-            @(Model.IsFollowing ? "Following" : "Follow")
-        </button>
-
+        if (Model.IsFollowing)
+        {
+            <button class="btn btn-info js-toggle-follow" data-user-id="@Model.Gig.ArtistId">Following</button>
+        }
+        else
+        {
+            <button class="btn btn-default js-toggle-follow" data-user-id="@Model.Gig.ArtistId">Follow</button>
+        }
     }
 </h2>
 <p>
@@ -24,38 +26,14 @@
 {
     <p>You are going to this event. </p>
 }
-
-@section scripts{
+@section scripts
+{
     <script>
         $(document).ready(function () {
-            
-            $(".js-toggle-attendance").click(function (e) {
-                var button = $(e.target);
-                gigId = button.attr("data-gig-id");
+        });
+    </script>
+}
 
-                if (button.hasClass("btn-default")) {
-                    $post("/api/attendance", { gigId: button.attr("data-gig-id") })
-                    .done(function () {
 
-                        alert("haha");
-                    })
-                    .fail("f**k.");
-                }
-                else {
 
-                    $.ajax({
-                        url: "/api/attendance" + gigId,
-                        method: "DELETE"
 
-                    })
-                    .done(function () { alert(gigId); })
-                    .fail(function () { alert("failed"); });
-
-                   
-                }
-            });
-
-        }) ;
-    </script>  
-    
-    }
