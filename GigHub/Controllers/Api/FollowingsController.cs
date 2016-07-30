@@ -23,7 +23,7 @@ namespace GigHub.Controllers.Api
 
             if (_context.Followings.
                 Any(f =>
-                    f.FolloweeId == userId &&
+                    f.FollowerId == userId &&
                     f.FolloweeId == dto.FolloweeId))
                 return BadRequest("Following already exists.");
 
