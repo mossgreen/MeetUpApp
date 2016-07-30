@@ -2,7 +2,6 @@
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -49,12 +48,7 @@ namespace GigHub.Controllers
             return View("Gigs", viewModel);
         }
 
-        private List<Attendance> GetFutureAttendances(string userId)
-        {
-            return _context.Attendances
-               .Where(a => a.AttendeeId == userId && a.Gig.DateTime > DateTime.Now)
-               .ToList();
-        }
+
 
 
         [HttpPost]
