@@ -11,7 +11,6 @@ namespace GigHub.Controllers
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly AttendanceRepository _attendanceRepository;
         private readonly FollowingRepository _followingRepository;
         private readonly GenreRepository _genreRepository;
         private readonly UnitOfWork _unitOfWork;
@@ -19,7 +18,6 @@ namespace GigHub.Controllers
         public GigsController()
         {
             _context = new ApplicationDbContext();
-            _attendanceRepository = new AttendanceRepository(_context);
             _followingRepository = new FollowingRepository(_context);
             _genreRepository = new GenreRepository(_context);
             _unitOfWork = new UnitOfWork(_context);
@@ -44,7 +42,7 @@ namespace GigHub.Controllers
                 UpcomingGigs = _unitOfWork.Gigs.GetGigsUserAttending(userId),
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Gigs I'm Attending",
-                Attendances = _attendanceRepository.GetFutureAttendances(userId).ToLookup(a => a.GigId),
+                Attendances = _unitOfWork.Attendances.GetFutureAttendances(userId).ToLookup(a => a.GigId),
             };
 
             return View("Gigs", viewModel);
@@ -186,7 +184,7 @@ namespace GigHub.Controllers
                 var userId = User.Identity.GetUserId();
 
                 viewModel.IsAttending =
-                    _attendanceRepository.GetAttendance(gig.Id, userId) != null;
+                    _unitOfWork.Attendances.GetAttendance(gig.Id, userId) != null;
 
                 viewModel.IsFollowing =
                     _followingRepository.GetFollowing(userId, gig.ArtistId) != null;
