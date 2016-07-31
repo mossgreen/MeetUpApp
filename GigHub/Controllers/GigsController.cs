@@ -11,14 +11,12 @@ namespace GigHub.Controllers
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly FollowingRepository _followingRepository;
         private readonly GenreRepository _genreRepository;
         private readonly UnitOfWork _unitOfWork;
 
         public GigsController()
         {
             _context = new ApplicationDbContext();
-            _followingRepository = new FollowingRepository(_context);
             _genreRepository = new GenreRepository(_context);
             _unitOfWork = new UnitOfWork(_context);
         }
@@ -187,7 +185,7 @@ namespace GigHub.Controllers
                     _unitOfWork.Attendances.GetAttendance(gig.Id, userId) != null;
 
                 viewModel.IsFollowing =
-                    _followingRepository.GetFollowing(userId, gig.ArtistId) != null;
+                    _unitOfWork.Followings.GetFollowing(userId, gig.ArtistId) != null;
             }
 
             return View("Details", viewModel);
