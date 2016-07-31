@@ -10,6 +10,7 @@ namespace GigHub.Persistence
         public GigRepository Gigs { get; private set; }
         public AttendanceRepository Attendances { get; private set; }
         public FollowingRepository Followings { get; private set; }
+        public GenreRepository Genres { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -17,6 +18,7 @@ namespace GigHub.Persistence
             Gigs = new GigRepository(context);
             Attendances = new AttendanceRepository(context);
             Followings = new FollowingRepository(context);
+            Genres = new GenreRepository(context);
         }
 
         public void Complete()

@@ -1,6 +1,5 @@
 ﻿using GigHub.Models;
 using GigHub.Persistence;
-using GigHub.Repositories;
 using GigHub.ViewModels;
 using Microsoft.AspNet.Identity;
 using System.Linq;
@@ -11,13 +10,11 @@ namespace GigHub.Controllers
     public class GigsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly GenreRepository _genreRepository;
         private readonly UnitOfWork _unitOfWork;
 
         public GigsController()
         {
             _context = new ApplicationDbContext();
-            _genreRepository = new GenreRepository(_context);
             _unitOfWork = new UnitOfWork(_context);
         }
 
@@ -64,7 +61,7 @@ namespace GigHub.Controllers
         {
             var viewModel = new GigFormViewModel
             {
-                Genres = _genreRepository.GetGenres(),
+                Genres = _unitOfWork.Genres.GetGenres(),
                 Heading = "Add a Gig"
             };
 
@@ -112,7 +109,7 @@ namespace GigHub.Controllers
             but won't post data*/
             if (!ModelState.IsValid)
             {
-                viewModel.Genres = _genreRepository.GetGenres();
+                viewModel.Genres = _unitOfWork.Genres.GetGenres();
                 return View("GigForm", viewModel);
             }
             /*if the form passed the validation
@@ -140,7 +137,7 @@ namespace GigHub.Controllers
         {
             if (!ModelState.IsValid)
             {
-                viewModel.Genres = _genreRepository.GetGenres();
+                viewModel.Genres = _unitOfWork.Genres.GetGenres();
                 return View("GigForm", viewModel);
             }
 
