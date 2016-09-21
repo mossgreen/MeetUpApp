@@ -1,6 +1,7 @@
-﻿using GigHub.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using GigHub.Core.Models;
+using GigHub.Persistence;
 
 namespace GigHub.Repositories
 {

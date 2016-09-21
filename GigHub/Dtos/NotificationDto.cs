@@ -1,5 +1,5 @@
-﻿using GigHub.Models;
-using System;
+﻿using System;
+using GigHub.Core.Models;
 
 namespace GigHub.Dtos
 {
