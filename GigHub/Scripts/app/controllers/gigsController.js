@@ -7,7 +7,7 @@ var GigsController = function (attendanceService) {
     var init = function (container) {
 
         
-        /*clicking the Going button will trager a http post
+        /*clicking the Going button will triger a http post
          with content of GigId, which comes from this button's attribute
          it will be passed as an Attendance Dto to controllers/api/AttendanceController,
          database will save this Attendance with current user's id and artist id.*/

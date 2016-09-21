@@ -6,9 +6,7 @@ using System.Linq;
 
 namespace GigHub.Repositories
 {
-
-
-    public class GigRepository
+    public class GigRepository : IGigRepository
     {
 
         private readonly ApplicationDbContext _context;

@@ -62,7 +62,7 @@ namespace GigHub.Controllers
                 Attendances = attendances,
             };
 
-            /*thid Gigs view is in the Shared folder,as Gigs.cshtml*/
+            /*this Gigs view is in the Shared folder,as Gigs.cshtml*/
             return View("Gigs", viewModel);
         }
 
