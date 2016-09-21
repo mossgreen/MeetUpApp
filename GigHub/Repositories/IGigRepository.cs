@@ -3,6 +3,11 @@ using GigHub.Models;
 
 namespace GigHub.Repositories
 {
+    /*
+     all the operation we have here simply works with domain objects,
+     there is nothing about EF and Dbcontext here,
+
+         */
     public interface IGigRepository
     {
         Gig GetGig(int gigId);

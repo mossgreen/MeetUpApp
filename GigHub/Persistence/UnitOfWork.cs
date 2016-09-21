@@ -3,7 +3,7 @@ using GigHub.Repositories;
 
 namespace GigHub.Persistence
 {
-    public class UnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
 
