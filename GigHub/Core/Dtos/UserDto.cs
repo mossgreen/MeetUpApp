@@ -1,4 +1,4 @@
-﻿namespace GigHub.Dtos
+﻿namespace GigHub.Core.Dtos
 {
     public class UserDto
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using GigHub.Core.Models;
-using GigHub.Persistence;
+using GigHub.Core.Repositories;
 
-namespace GigHub.Repositories
+namespace GigHub.Persistence.Repositories
 {
     public class GigRepository : IGigRepository
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using GigHub.Core.Models;
 
-namespace GigHub.Repositories
+namespace GigHub.Core.Repositories
 {
     /*
      all the operation we have here simply works with domain objects,
