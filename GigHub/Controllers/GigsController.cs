@@ -17,6 +17,31 @@ namespace GigHub.Controllers
             _unitOfWork = uniteOfWork;
         }
 
+
+        public ActionResult Details(int id)
+        {
+            var gig = _unitOfWork.Gigs.GetGig(id);
+
+            if (gig == null)
+                return HttpNotFound();
+
+            var viewModel = new GigDetailsViewModel { Gig = gig };
+
+            if (User.Identity.IsAuthenticated)
+            {
+                var userId = User.Identity.GetUserId();
+
+                viewModel.IsAttending =
+                    _unitOfWork.Attendances.GetAttendance(gig.Id, userId) != null;
+
+                viewModel.IsFollowing =
+                    _unitOfWork.Followings.GetFollowing(userId, gig.ArtistId) != null;
+            }
+
+            return View("Details", viewModel);
+        }
+
+
         [Authorize]
         public ActionResult Mine()
         {
@@ -88,7 +113,7 @@ namespace GigHub.Controllers
             {
                 Heading = "Edit a Gig",
                 Id = gig.Id,
-                Genres = _context.Genres.ToList(),
+                Genres = _unitOfWork.Genres.GetGenres(),
                 Date = gig.DateTime.ToString("d MMM yyyy"),
                 Time = gig.DateTime.ToString("HH:mm"),
                 Genre = gig.GenreId,
@@ -164,27 +189,6 @@ namespace GigHub.Controllers
             return RedirectToAction("Mine", "Gigs");
         }
 
-        public ActionResult Details(int id)
-        {
-            var gig = _unitOfWork.Gigs.GetGig(id);
 
-            if (gig == null)
-                return HttpNotFound();
-
-            var viewModel = new GigDetailsViewModel { Gig = gig };
-
-            if (User.Identity.IsAuthenticated)
-            {
-                var userId = User.Identity.GetUserId();
-
-                viewModel.IsAttending =
-                    _unitOfWork.Attendances.GetAttendance(gig.Id, userId) != null;
-
-                viewModel.IsFollowing =
-                    _unitOfWork.Followings.GetFollowing(userId, gig.ArtistId) != null;
-            }
-
-            return View("Details", viewModel);
-        }
     }
 }
