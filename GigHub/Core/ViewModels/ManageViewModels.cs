@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace GigHub.ViewModels
+namespace GigHub.Core.ViewModels
 {
     public class IndexViewModel
     {

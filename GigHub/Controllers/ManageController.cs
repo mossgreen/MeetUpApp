@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using GigHub.Core.Models;
-using GigHub.ViewModels;
+using GigHub.Core.ViewModels;
 
 namespace GigHub.Controllers
 {
