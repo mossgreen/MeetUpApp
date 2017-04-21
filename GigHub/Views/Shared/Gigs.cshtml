@@ -3,9 +3,6 @@
     ViewBag.Title = "Home Page";
 }
 <h1>@Model.Heading</h1>
-
-
-@*searching form*@
 @using (Html.BeginForm("Search", "Gigs"))
 {
     <div class="form-group">
@@ -13,7 +10,7 @@
             @Html.TextBoxFor(m => m.SearchTerm, new { @class = "form-control", placeholder = "Search by Artist, Genre or Location..." })
             <span class="input-group-addon">
                 <i class="glyphicon glyphicon-search"></i>
-            </span>
+            </span>            
         </div>
     </div>
 }
@@ -34,7 +31,7 @@
                     <a href="@Url.Action("Details", "Gigs", new { id = gig.Id })">
                         @gig.Artist.Name
                     </a>
-
+                    
                     @if (gig.IsCanceled)
                     {
                         <span class="label label-warning">Canceled</span>
@@ -45,11 +42,12 @@
                 </span>
                 @if (Model.ShowActions && !gig.IsCanceled)
                 {
-                    <button data-gig-id="@gig.Id"
-                            class="btn
-                            @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default")
+                    <button 
+                        data-gig-id="@gig.Id" 
+                        class="btn 
+                            @(Model.Attendances.Contains(gig.Id) ? "btn-info" : "btn-default") 
                             btn-sm js-toggle-attendance">
-                        @(Model.Attendances.Contains(gig.Id) ? "Going" : "Going?")
+                        @(Model.Attendances.Contains(gig.Id)? "Going": "Going?")
                     </button>
                 }
             </div>
@@ -59,24 +57,8 @@
 @section scripts
 {
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             GigsController.init("#gigs");
-            
-
-            /*clicking the Follow button will trager a http post
-           with data of artistId, which comes from this button's attribute
-           it will be passed as an Following Dto to controllers/api/FollowingController,
-           database will save this Following with gigId and AttendeeId.*/
-            $(".js-toggle-follow").click(function (e) {
-                var button = $(e.target);
-                $.post("/api/followings", { followeeId: button.attr("data-user-id") })
-                    .done(function () {
-                        button.text("Following");
-                    })
-                    .fail(function () {
-                        alert("Something failed");
-                    });
-            });
         });
     </script>
 }

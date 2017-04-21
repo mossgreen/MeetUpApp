@@ -1,6 +1,6 @@
-﻿using System.Linq;
-using GigHub.Core.Models;
+﻿using GigHub.Core.Models;
 using GigHub.Core.Repositories;
+using System.Linq;
 
 namespace GigHub.Persistence.Repositories
 {
@@ -17,6 +17,16 @@ namespace GigHub.Persistence.Repositories
         {
             return _context.Followings
                 .SingleOrDefault(f => f.FolloweeId == followeeId && f.FollowerId == followerId);
+        }
+
+        public void Add(Following following)
+        {
+            _context.Followings.Add(following);
+        }
+
+        public void Remove(Following following)
+        {
+            _context.Followings.Remove(following);
         }
     }
 }

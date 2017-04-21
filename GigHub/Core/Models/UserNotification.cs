@@ -1,17 +1,11 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GigHub.Core.Models
 {
     public class UserNotification
     {
-        [Key]
-        [Column(Order = 1)]
         public string UserId { get; private set; }
 
-        [Key]
-        [Column(Order = 2)]
         public int NotificationId { get; private set; }
 
         public ApplicationUser User { get; private set; }
@@ -20,10 +14,8 @@ namespace GigHub.Core.Models
 
         public bool IsRead { get; private set; }
 
-        //default constructor is for EF
         protected UserNotification()
         {
-
         }
 
         public UserNotification(ApplicationUser user, Notification notification)

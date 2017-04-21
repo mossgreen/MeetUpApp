@@ -2,7 +2,6 @@
 {
     public class FollowingDto
     {
-        //followeeid is artist's id
-        public string FolloweeId { get; set; }
+        public string FolloweeId { get; set; }    
     }
 }

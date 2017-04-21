@@ -20,8 +20,8 @@ namespace GigHub
                         "~/Scripts/underscore-min.js",
                         "~/Scripts/moment.js",
                         "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js",
-                      "~/Scripts/bootbox.js"));
+                        "~/Scripts/respond.js",
+                        "~/Scripts/bootbox.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -30,8 +30,6 @@ namespace GigHub
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
-
-
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

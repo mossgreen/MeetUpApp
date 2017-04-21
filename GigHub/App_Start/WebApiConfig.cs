@@ -8,7 +8,6 @@ namespace GigHub
     {
         public static void Register(HttpConfiguration config)
         {
-
             var settings = GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             settings.Formatting = Formatting.Indented;

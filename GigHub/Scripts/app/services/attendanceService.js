@@ -1,7 +1,5 @@
-﻿var AttendanceService = function () {
-
-    //now we have a clean service which knows nothing about UI
-    //so it can be reused by multiple controllers
+﻿
+var AttendanceService = function () {
     var createAttendance = function (gigId, done, fail) {
         $.post("/api/attendances", { gigId: gigId })
             .done(done)

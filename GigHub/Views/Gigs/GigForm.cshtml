@@ -1,6 +1,6 @@
 ﻿@model GigHub.Core.ViewModels.GigFormViewModel
 @{
-    ViewBag.Title = @Model.Heading;
+    ViewBag.Title = Model.Heading;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -9,19 +9,15 @@
 {
     <p class="alert alert-info">All fields are <strong>required</strong>.</p>
     @Html.AntiForgeryToken()
-
-    @*this is a hidden attribute,GigId, and will be generated automaticly*@
-    @Html.HiddenFor(m => m.Id) 
-
-
+    @Html.HiddenFor(m => m.Id)
     <div class="form-group">
         @Html.LabelFor(m => m.Venue)
-        @Html.TextBoxFor(m => m.Venue, new { @class = "form-control" ,autofocus="autofocus"})
+        @Html.TextBoxFor(m => m.Venue, new { @class = "form-control", autofocus = "autofocus" })
         @Html.ValidationMessageFor(m => m.Venue)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Date)
-        @Html.TextBoxFor(m => m.Date, new { @class = "form-control" ,placeholder="eg 1 Jan 2015"})
+        @Html.TextBoxFor(m => m.Date, new { @class = "form-control", placeholder = "eg 1 Jan 2015" })
         @Html.ValidationMessageFor(m => m.Date)
     </div>
     <div class="form-group">
@@ -36,12 +32,7 @@
     </div>
     <button type="submit" class="btn btn-primary btn-lg">Save</button>
 }
-
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")
-
-
 }
-
-

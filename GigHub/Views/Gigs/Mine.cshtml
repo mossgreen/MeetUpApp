@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<GigHub.Core.Models.Gig>
-    @* Since this page will dispaly multiple pages, it uses IEnumerable classes *@
 @{
     ViewBag.Title = "Mine";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Mine Upcoming Gigs</h2>
+<h2>My Upcoming Gigs</h2>
 <ul class="gigs voffset4">
     @foreach (var gig in Model)
     {
@@ -58,12 +58,6 @@
                             label: "Yes",
                             className: "btn-danger",
                             callback: function () {
-
-                                /*if user hit Cancel button, it will trager this ajax,
-                                will post a DELETE method on api/gigs/gigId
-                                however, under [httpdelete] there is a Cancel method.
-                                it won't delete this gig from database,
-                                isCanceled attrubute will be set to  true.*/
                                 $.ajax({
                                     url: "/api/gigs/" + link.attr("data-gig-id"),
                                     method: "DELETE"
@@ -74,7 +68,7 @@
                                     });
                                 })
                                 .fail(function () {
-                                    alert(".js-cancel-gig failed!");
+                                    alert("Something failed!");
                                 });
                             }
                         }
@@ -82,7 +76,5 @@
                 });
             });
         });
-</script>
+    </script>
 }
-
-

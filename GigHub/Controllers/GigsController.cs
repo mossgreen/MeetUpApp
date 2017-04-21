@@ -1,10 +1,10 @@
-﻿using GigHub.Persistence;
+﻿using GigHub.Core;
+using GigHub.Core.Models;
+using GigHub.Core.ViewModels;
+using GigHub.Persistence;
 using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Web.Mvc;
-using GigHub.Core;
-using GigHub.Core.Models;
-using GigHub.Core.ViewModels;
 
 namespace GigHub.Controllers
 {
@@ -12,12 +12,10 @@ namespace GigHub.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public GigsController(IUnitOfWork uniteOfWork)
+        public GigsController(IUnitOfWork unitOfWork)
         {
-            //this is dependency indecting
-            _unitOfWork = uniteOfWork;
+            _unitOfWork = unitOfWork;
         }
-
 
         public ActionResult Details(int id)
         {
@@ -32,10 +30,10 @@ namespace GigHub.Controllers
             {
                 var userId = User.Identity.GetUserId();
 
-                viewModel.IsAttending =
+                viewModel.IsAttending = 
                     _unitOfWork.Attendances.GetAttendance(gig.Id, userId) != null;
 
-                viewModel.IsFollowing =
+                viewModel.IsFollowing = 
                     _unitOfWork.Followings.GetFollowing(userId, gig.ArtistId) != null;
             }
 
@@ -62,14 +60,11 @@ namespace GigHub.Controllers
                 UpcomingGigs = _unitOfWork.Gigs.GetGigsUserAttending(userId),
                 ShowActions = User.Identity.IsAuthenticated,
                 Heading = "Gigs I'm Attending",
-                Attendances = _unitOfWork.Attendances.GetFutureAttendances(userId).ToLookup(a => a.GigId),
+                Attendances = _unitOfWork.Attendances.GetFutureAttendances(userId).ToLookup(a => a.GigId)
             };
 
             return View("Gigs", viewModel);
         }
-
-
-
 
         [HttpPost]
         public ActionResult Search(GigsViewModel viewModel)
@@ -77,10 +72,6 @@ namespace GigHub.Controllers
             return RedirectToAction("Index", "Home", new { query = viewModel.SearchTerm });
         }
 
-        /*this is the httpGet for Add a Gig page,
-        it will get genres list as data provided for dropdown list
-        and heading for this page: Add a gig. reason for heading:
-        this page can also be used as Updating a gig page.*/
         [Authorize]
         public ActionResult Create()
         {
@@ -93,11 +84,6 @@ namespace GigHub.Controllers
             return View("GigForm", viewModel);
         }
 
-        /*this method retrieved data from database
-        firstly, it gets userId from current user,
-        and then, it gets the gig from gigs table from database,
-        at last, build a viewModel and send it to GigForm,
-        hence GigForm becomes an Editing form.*/
         [Authorize]
         public ActionResult Edit(int id)
         {
@@ -108,7 +94,6 @@ namespace GigHub.Controllers
 
             if (gig.ArtistId != User.Identity.GetUserId())
                 return new HttpUnauthorizedResult();
-
 
             var viewModel = new GigFormViewModel
             {
@@ -129,18 +114,12 @@ namespace GigHub.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(GigFormViewModel viewModel)
         {
-            /*if the form didn't pass the validation
-            the the dropdown list still can get genres data
-            but won't post data*/
             if (!ModelState.IsValid)
             {
                 viewModel.Genres = _unitOfWork.Genres.GetGenres();
                 return View("GigForm", viewModel);
             }
-            /*if the form passed the validation
-            construct a new gig using the filed data
-            add this gig to gigs table and save the database
-            redirect this page to Views/Gigs/Mine page*/
+
             var gig = new Gig
             {
                 ArtistId = User.Identity.GetUserId(),
@@ -166,30 +145,19 @@ namespace GigHub.Controllers
                 return View("GigForm", viewModel);
             }
 
-            /*if this post method passed validation,
-            it firstly will get the userId, which is the id of current artist's id
-            and then it will get this old gig from Gigs table from database, 
-            with Attendances infomation with it.
-            At last, making modifications to this gig with data from viewModel.
-            this Modify method is from Models/Gig, and 
-            will iterate each attendee to notify them the modification of this gig.*/
-            var userId = User.Identity.GetUserId();
-
             var gig = _unitOfWork.Gigs.GetGigWithAttendees(viewModel.Id);
-
-            gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre);
 
             if (gig == null)
                 return HttpNotFound();
 
-            if (gig.ArtistId != userId)
+            if (gig.ArtistId != User.Identity.GetUserId())
                 return new HttpUnauthorizedResult();
 
+            gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre);
+            
             _unitOfWork.Complete();
 
             return RedirectToAction("Mine", "Gigs");
         }
-
-
     }
 }
