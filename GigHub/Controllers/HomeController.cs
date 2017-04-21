@@ -27,7 +27,7 @@ namespace GigHub.Controllers
             {
                 UpcomingGigs = upcomingGigs,
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Upcoming Gigs",
+                Heading = "Upcoming Meetups",
                 SearchTerm = query,
                 Attendances = attendances
             };
