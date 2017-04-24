@@ -8,6 +8,8 @@ namespace GigHub.Core.Models
         public int Id { get; private set; }
         public DateTime DateTime { get; private set; }
         public NotificationType Type { get; private set; }
+
+        //it's nullable because it's useful only when updated
         public DateTime? OriginalDateTime { get; private set; }
         public string OriginalVenue { get; private set; }
 
@@ -33,6 +35,7 @@ namespace GigHub.Core.Models
             return new Notification(NotificationType.GigCreated, gig);
         }
 
+        //factory method, create a method id a valid state
         public static Notification GigUpdated(Gig newGig, DateTime originalDateTime, string originalVenue)
         {
             var notification = new Notification(NotificationType.GigUpdated, newGig);
