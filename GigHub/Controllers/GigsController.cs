@@ -59,7 +59,7 @@ namespace GigHub.Controllers
             {
                 UpcomingGigs = _unitOfWork.Gigs.GetGigsUserAttending(userId),
                 ShowActions = User.Identity.IsAuthenticated,
-                Heading = "Gigs I'm Attending",
+                Heading = "Meetups I'm Attending",
                 Attendances = _unitOfWork.Attendances.GetFutureAttendances(userId).ToLookup(a => a.GigId)
             };
 
@@ -78,7 +78,7 @@ namespace GigHub.Controllers
             var viewModel = new GigFormViewModel
             {
                 Genres = _unitOfWork.Genres.GetGenres(),
-                Heading = "Add a Gig"
+                Heading = "Add a Meetup"
             };
 
             return View("GigForm", viewModel);
@@ -97,7 +97,7 @@ namespace GigHub.Controllers
 
             var viewModel = new GigFormViewModel
             {
-                Heading = "Edit a Gig",
+                Heading = "Edit a Meetup",
                 Id = gig.Id,
                 Genres = _unitOfWork.Genres.GetGenres(),
                 Date = gig.DateTime.ToString("d MMM yyyy"),
