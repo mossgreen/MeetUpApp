@@ -24,7 +24,7 @@ namespace GigHub.Core.ViewModels
         public string Time { get; set; }
 
         [Required]
-        public byte Genre { get; set; }
+        public byte Category { get; set; }
 
         public IEnumerable<Category> Genres { get; set; }
         

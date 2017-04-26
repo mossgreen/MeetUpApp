@@ -102,7 +102,7 @@ namespace GigHub.Controllers
                 Genres = _unitOfWork.Categories.GetGenres(),
                 Date = gig.DateTime.ToString("d MMM yyyy"),
                 Time = gig.DateTime.ToString("HH:mm"),
-                Genre = gig.GenreId,
+                Category = gig.GenreId,
                 Venue = gig.Venue
             };
 
@@ -124,7 +124,7 @@ namespace GigHub.Controllers
             {
                 ArtistId = User.Identity.GetUserId(),
                 DateTime = viewModel.GetDateTime(),
-                GenreId = viewModel.Genre,
+                GenreId = viewModel.Category,
                 Venue = viewModel.Venue
             };
 
@@ -153,7 +153,7 @@ namespace GigHub.Controllers
             if (gig.ArtistId != User.Identity.GetUserId())
                 return new HttpUnauthorizedResult();
 
-            gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre);
+            gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Category);
             
             _unitOfWork.Complete();
 
