@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace GigHub.Persistence.EntityConfigurations
 {
-    public class GenreConfiguration : EntityTypeConfiguration<Genre>
+    public class GenreConfiguration : EntityTypeConfiguration<Category>
     {
         public GenreConfiguration()
         {

@@ -1,7 +1,7 @@
 ﻿
 namespace GigHub.Core.Models
 {
-    public class Genre
+    public class Category
     {
         public byte Id { get; set; }
 

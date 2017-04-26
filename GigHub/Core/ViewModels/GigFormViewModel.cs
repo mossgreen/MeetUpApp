@@ -26,7 +26,7 @@ namespace GigHub.Core.ViewModels
         [Required]
         public byte Genre { get; set; }
 
-        public IEnumerable<Genre> Genres { get; set; }
+        public IEnumerable<Category> Genres { get; set; }
         
         public string Heading { get; set; }
         

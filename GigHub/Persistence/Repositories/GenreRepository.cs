@@ -15,7 +15,7 @@ namespace GigHub.Persistence.Repositories
             _context = context;
         }
 
-        public IEnumerable<Genre> GetGenres()
+        public IEnumerable<Category> GetGenres()
         {
             return _context.Genres.ToList();
         }

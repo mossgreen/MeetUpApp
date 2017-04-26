@@ -309,6 +309,10 @@
     <Compile Include="Persistence\Migrations\201512072356029_AddNotification.Designer.cs">
       <DependentUpon>201512072356029_AddNotification.cs</DependentUpon>
     </Compile>
+    <Compile Include="Persistence\Migrations\201704260657569_addCategory.cs" />
+    <Compile Include="Persistence\Migrations\201704260657569_addCategory.Designer.cs">
+      <DependentUpon>201704260657569_addCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Persistence\Migrations\Configuration.cs" />
     <Compile Include="Persistence\Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Persistence\Repositories\AttendanceRepository.cs" />
@@ -441,6 +445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Persistence\Migrations\201512072356029_AddNotification.resx">
       <DependentUpon>201512072356029_AddNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Persistence\Migrations\201704260657569_addCategory.resx">
+      <DependentUpon>201704260657569_addCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
