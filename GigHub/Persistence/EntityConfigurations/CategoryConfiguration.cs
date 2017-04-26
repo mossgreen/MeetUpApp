@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace GigHub.Persistence.EntityConfigurations
 {
-    public class GenreConfiguration : EntityTypeConfiguration<Genre>
+    public class CategoryConfiguration : EntityTypeConfiguration<Category>
     {
-        public GenreConfiguration()
+        public CategoryConfiguration()
         {
             Property(g => g.Name)
                 .IsRequired()

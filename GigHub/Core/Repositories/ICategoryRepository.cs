@@ -3,8 +3,8 @@ using GigHub.Core.Models;
 
 namespace GigHub.Core.Repositories
 {
-    public interface IGenreRepository
+    public interface ICategoryRepository
     {
-        IEnumerable<Genre> GetGenres();
+        IEnumerable<Category> GetGenres();
     }
 }

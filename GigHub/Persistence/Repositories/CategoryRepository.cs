@@ -6,18 +6,18 @@ using GigHub.Core.Repositories;
 
 namespace GigHub.Persistence.Repositories
 {
-    public class GenreRepository : IGenreRepository
+    public class CategoryRepository : ICategoryRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public GenreRepository(ApplicationDbContext context)
+        public CategoryRepository(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IEnumerable<Genre> GetGenres()
+        public IEnumerable<Category> GetGenres()
         {
-            return _context.Genres.ToList();
+            return _context.Categories.ToList();
         }
     }
 }

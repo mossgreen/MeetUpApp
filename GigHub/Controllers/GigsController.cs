@@ -77,7 +77,7 @@ namespace GigHub.Controllers
         {
             var viewModel = new GigFormViewModel
             {
-                Genres = _unitOfWork.Genres.GetGenres(),
+                Genres = _unitOfWork.Categories.GetGenres(),
                 Heading = "Add a Meetup"
             };
 
@@ -99,10 +99,10 @@ namespace GigHub.Controllers
             {
                 Heading = "Edit a Meetup",
                 Id = gig.Id,
-                Genres = _unitOfWork.Genres.GetGenres(),
+                Genres = _unitOfWork.Categories.GetGenres(),
                 Date = gig.DateTime.ToString("d MMM yyyy"),
                 Time = gig.DateTime.ToString("HH:mm"),
-                Genre = gig.GenreId,
+                Category = gig.GenreId,
                 Venue = gig.Venue
             };
 
@@ -116,7 +116,7 @@ namespace GigHub.Controllers
         {
             if (!ModelState.IsValid)
             {
-                viewModel.Genres = _unitOfWork.Genres.GetGenres();
+                viewModel.Genres = _unitOfWork.Categories.GetGenres();
                 return View("GigForm", viewModel);
             }
 
@@ -124,7 +124,7 @@ namespace GigHub.Controllers
             {
                 ArtistId = User.Identity.GetUserId(),
                 DateTime = viewModel.GetDateTime(),
-                GenreId = viewModel.Genre,
+                GenreId = viewModel.Category,
                 Venue = viewModel.Venue
             };
 
@@ -141,7 +141,7 @@ namespace GigHub.Controllers
         {
             if (!ModelState.IsValid)
             {
-                viewModel.Genres = _unitOfWork.Genres.GetGenres();
+                viewModel.Genres = _unitOfWork.Categories.GetGenres();
                 return View("GigForm", viewModel);
             }
 
@@ -153,7 +153,7 @@ namespace GigHub.Controllers
             if (gig.ArtistId != User.Identity.GetUserId())
                 return new HttpUnauthorizedResult();
 
-            gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Genre);
+            gig.Modify(viewModel.GetDateTime(), viewModel.Venue, viewModel.Category);
             
             _unitOfWork.Complete();
 
