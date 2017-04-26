@@ -8,7 +8,7 @@ namespace GigHub.Persistence
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Gig> Gigs { get; set; }
-        public DbSet<Category> Genres { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<Following> Followings { get; set; }
         public DbSet<Notification> Notifications { get; set; }
