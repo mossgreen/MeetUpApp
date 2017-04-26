@@ -238,7 +238,7 @@
     <Compile Include="Core\Models\ApplicationUser.cs" />
     <Compile Include="Core\Models\Attendance.cs" />
     <Compile Include="Core\Models\Following.cs" />
-    <Compile Include="Core\Models\Genre.cs" />
+    <Compile Include="Core\Models\Category.cs" />
     <Compile Include="Core\Models\Gig.cs" />
     <Compile Include="Core\Models\Notification.cs" />
     <Compile Include="Core\Models\NotificationType.cs" />
@@ -246,7 +246,7 @@
     <Compile Include="Core\Repositories\IApplicationUserRepository.cs" />
     <Compile Include="Core\Repositories\IAttendanceRepository.cs" />
     <Compile Include="Core\Repositories\IFollowingRepository.cs" />
-    <Compile Include="Core\Repositories\IGenreRepository.cs" />
+    <Compile Include="Core\Repositories\ICategoryRepository.cs" />
     <Compile Include="Core\Repositories\IGigRepository.cs" />
     <Compile Include="Core\Repositories\INotificationRepository.cs" />
     <Compile Include="Core\Repositories\IUserNotificationRepository.cs" />
@@ -265,7 +265,7 @@
     <Compile Include="Persistence\EntityConfigurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\AttendanceConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\FollowingConfiguration.cs" />
-    <Compile Include="Persistence\EntityConfigurations\GenreConfiguration.cs" />
+    <Compile Include="Persistence\EntityConfigurations\CategoryConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\GigConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\NotificationConfiguration.cs" />
     <Compile Include="Persistence\EntityConfigurations\UserNotificationConfiguration.cs" />
@@ -317,7 +317,7 @@
     <Compile Include="Persistence\Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Persistence\Repositories\AttendanceRepository.cs" />
     <Compile Include="Persistence\Repositories\FollowingRepository.cs" />
-    <Compile Include="Persistence\Repositories\GenreRepository.cs" />
+    <Compile Include="Persistence\Repositories\CategoryRepository.cs" />
     <Compile Include="Persistence\Repositories\GigRepository.cs" />
     <Compile Include="Persistence\Repositories\NotificationRepository.cs" />
     <Compile Include="Persistence\Repositories\UserNotificationRepository.cs" />

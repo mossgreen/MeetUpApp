@@ -29,7 +29,7 @@ namespace GigHub.Persistence
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new AttendanceConfiguration());
             modelBuilder.Configurations.Add(new FollowingConfiguration());
-            modelBuilder.Configurations.Add(new GenreConfiguration());
+            modelBuilder.Configurations.Add(new CategoryConfiguration());
             modelBuilder.Configurations.Add(new GigConfiguration());
             modelBuilder.Configurations.Add(new NotificationConfiguration());
             modelBuilder.Configurations.Add(new UserNotificationConfiguration());
